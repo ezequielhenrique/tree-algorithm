@@ -87,7 +87,30 @@ public class BST implements EstruturaDeDados{
 
     @Override
     public int minimum() {
-        return 0;
+        if (root == null) {
+            return -1;
+        } else {
+            int min = compareMinimum(root, root.getValue());
+            return min;
+        }
+    }
+
+    private int compareMinimum(Node no, int minimum) {
+        int newMinimum = minimum;
+
+        if (no.getLeft() != null) {
+            if (no.getLeft().getValue() < minimum) {
+                newMinimum = no.getLeft().getValue();
+            }
+            return compareMinimum(no.getLeft(), newMinimum);
+        } else if (no.getRight() != null) {
+            if (no.getRight().getValue() < minimum) {
+                newMinimum = no.getRight().getValue();
+            }
+            return compareMinimum(no.getRight(), newMinimum);
+        } else {
+            return newMinimum;
+        }
     }
 
     @Override
@@ -108,11 +131,17 @@ public class BST implements EstruturaDeDados{
     public static void main(String[] args) {
         BST tree = new BST();
         System.out.println(tree.search(7));
-        // tree.insert(4);
-        // tree.insert(2);
-        // tree.insert(5);
-        // tree.insert(6);
-        // System.out.println(tree.search(5));
-        // System.out.println(tree.search(7));
+        tree.insert(4);
+        tree.insert(2);
+        tree.insert(5);
+        tree.insert(6);
+        tree.insert(10);
+        tree.insert(99);
+        tree.insert(15);
+        tree.insert(1);
+        System.out.println(tree.search(5));
+        System.out.println(tree.search(7));
+        System.out.println(tree.search(1));
+        System.out.println(tree.minimum());
     }
 }
