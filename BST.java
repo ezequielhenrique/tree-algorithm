@@ -90,32 +90,43 @@ public class BST implements EstruturaDeDados{
         if (root == null) {
             return -1;
         } else {
-            int min = compareMinimum(root, root.getValue());
-            return min;
+            return compareMinimum(root, root.getValue());
         }
     }
 
     private int compareMinimum(Node no, int minimum) {
-        int newMinimum = minimum;
+        int min = minimum;
 
         if (no.getLeft() != null) {
             if (no.getLeft().getValue() < minimum) {
-                newMinimum = no.getLeft().getValue();
+                min = no.getLeft().getValue();
             }
-            return compareMinimum(no.getLeft(), newMinimum);
-        } else if (no.getRight() != null) {
-            if (no.getRight().getValue() < minimum) {
-                newMinimum = no.getRight().getValue();
-            }
-            return compareMinimum(no.getRight(), newMinimum);
+            return compareMinimum(no.getLeft(), min);
         } else {
-            return newMinimum;
+            return min;
         }
     }
 
     @Override
     public int maximum() {
-        return 0;
+        if (root == null) {
+            return -1;
+        } else {
+            return compareMaximum(root, root.getValue());
+        }
+    }
+
+    private int compareMaximum(Node no, int maximum) {
+        int max = maximum;
+
+        if (no.getRight() != null) {
+            if (no.getRight().getValue() > maximum) {
+                max = no.getRight().getValue();
+            }
+            return compareMaximum(no.getRight(), max);
+        } else {
+            return max;
+        }
     }
 
     @Override
@@ -138,10 +149,12 @@ public class BST implements EstruturaDeDados{
         tree.insert(10);
         tree.insert(99);
         tree.insert(15);
+        tree.insert(8);
         tree.insert(1);
         System.out.println(tree.search(5));
         System.out.println(tree.search(7));
         System.out.println(tree.search(1));
         System.out.println(tree.minimum());
+        System.out.println(tree.maximum());
     }
 }
