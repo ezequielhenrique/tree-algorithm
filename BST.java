@@ -33,7 +33,101 @@ public class BST implements EstruturaDeDados{
 
     @Override
     public void delete(int chave) {
-        
+        remover(chave);
+    }
+
+    private boolean remover(int key) {
+        Node atual = this.root;
+        Node paiatual = null;
+        while(atual != null ){
+            if (atual.getValue() == key){
+                break;
+            } else if (key < atual.getValue() ){
+                paiatual = atual;
+                atual= atual.getLeft();
+
+            } else {
+                paiatual = atual;
+                atual= atual.getRight();
+            }
+
+        }  if ( atual != null ){
+            if(atual.getRight() != null){
+                Node substitiNode = atual.getRight();
+                 Node substitipai = atual ;
+                 while ( substitiNode.getLeft()!= null){
+                    substitipai = substitiNode;
+                    substitiNode = substitiNode.getLeft();
+                 } if (paiatual!= null){
+                    if ( atual.getValue()<paiatual.getValue()){
+                        paiatual.setLeft(substitiNode);
+                    }
+                    else {
+                        paiatual.setRight(substitiNode);
+                    }
+                 }
+                 else {
+                    this.root = substitiNode;
+                 } 
+                 
+
+                 if ( substitiNode.getValue()<substitipai.getValue()){
+                    substitipai.setLeft(null);
+                }
+                else {
+                    substitipai.setRight(null);
+                }
+
+          
+
+            } else if ( atual.getLeft() != null){
+                 Node substitiNode = atual.getLeft();
+                 Node substitipai = atual ;
+                 while ( substitiNode.getRight()!= null){
+                    substitipai = substitiNode;
+                    substitiNode = substitiNode.getRight();
+                
+                 } 
+                 if (paiatual != null ){
+                    if ( atual.getValue()<paiatual.getValue()){
+                        paiatual.setLeft(substitiNode);
+                    }
+                    else {
+                        paiatual.setRight(substitiNode);
+                    }
+
+                 }
+                 else {
+                    this.root = substitiNode;
+                 }
+                 
+
+                 if ( substitiNode.getValue()<substitipai.getValue()){
+                    substitipai.setLeft(null);
+                }
+                else {
+                    substitipai.setRight(null);
+                }
+
+            }else {
+                if (paiatual!= null){
+                    if ( atual.getValue()<paiatual.getValue()){
+                        paiatual.setLeft(null);
+                    }
+                    else {
+                        paiatual.setRight(null);
+                    }
+
+                } else {
+                    this.root = null;
+                }
+               
+            }
+              return true ;
+        }
+         else {
+            return false ;
+         }
     }
 
     private void deleteNode(Node n, int key){
@@ -206,5 +300,9 @@ public class BST implements EstruturaDeDados{
         System.out.println(tree.prodessor(10));
         System.out.println(tree.prodessor(99));
         System.out.println(tree.prodessor(1));
+        tree.delete(10);
+        System.out.println(tree.search(10));
+        tree.delete(99);
+        System.out.println(tree.search(99));
     }
 }
