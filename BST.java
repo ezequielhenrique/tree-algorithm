@@ -1,3 +1,10 @@
+/*
+ * Grupo:
+ * Ezequiel Henrique Melo do Nascimento
+ * Izadora Freitas Oliveira
+ * Pedro Henrique de Almeida Santos
+ */
+
 public class BST implements EstruturaDeDados{
 
     private Node root;
@@ -306,3 +313,10 @@ public class BST implements EstruturaDeDados{
         System.out.println(tree.search(99));
     }
 }
+
+/*
+ * Grupo:
+ * Ezequiel Henrique Melo do Nascimento
+ * Izadora Freitas Oliveira
+ * Pedro Henrique de Almeida Santos
+ */
