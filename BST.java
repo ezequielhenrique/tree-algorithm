@@ -250,7 +250,7 @@ public class BST implements EstruturaDeDados{
     @Override
     public int prodessor(int chave) {
         int [] prodessor = new int [1];
-        int min = prodessor [0] = compareMinimum(root, root.getValue());
+        int min = compareMinimum(root, root.getValue());
         prodessor[0] = min;
 
         if (chave == min) {
