@@ -132,9 +132,15 @@ public class BST implements EstruturaDeDados{
     @Override
     public int sucessor(int chave) {
         int[] sucessor = new int[1];
-        sucessor[0] = compareMaximum(root, root.getValue());
-        searchSucessor(root, chave, sucessor);
-        return sucessor[0];
+        int max = compareMaximum(root, root.getValue());
+        sucessor[0] = max;
+
+        if (chave == max) {
+            return -1;
+        } else {
+            searchSucessor(root, chave, sucessor);
+            return sucessor[0];
+        }
     }
 
     private void searchSucessor(Node no, int key, int[] sucessor) {
@@ -149,7 +155,26 @@ public class BST implements EstruturaDeDados{
 
     @Override
     public int prodessor(int chave) {
-        return -1;
+        int [] prodessor = new int [1];
+        int min = prodessor [0] = compareMinimum(root, root.getValue());
+        prodessor[0] = min;
+
+        if (chave == min) {
+            return -1;
+        } else {
+            searchProdessor(root, chave, prodessor);
+            return prodessor[0];
+        }
+    }
+
+    private void searchProdessor(Node no, int key, int[] prodessor) {
+        if (no != null) {
+            searchProdessor(no.getRight(), key, prodessor);
+            if (no.getValue() < key && no.getValue() >prodessor[0]) {
+                prodessor[0] = no.getValue();
+            }
+            searchProdessor(no.getLeft(), key, prodessor);
+        }
     }
 
     public static void main(String[] args) {
@@ -177,6 +202,9 @@ public class BST implements EstruturaDeDados{
         System.out.println(tree.sucessor(8));
         System.out.println(tree.sucessor(10));
         System.out.println(tree.sucessor(15));
-        
+        System.out.println(tree.sucessor(99));
+        System.out.println(tree.prodessor(10));
+        System.out.println(tree.prodessor(99));
+        System.out.println(tree.prodessor(1));
     }
 }
